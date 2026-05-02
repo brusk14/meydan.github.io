@@ -4,169 +4,279 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meydan Fırın - İcmal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fdf8f5;
-            color: #3e2723;
-            margin: 0;
-            padding: 0;
-            padding-bottom: 90px;
-            padding-top: 130px; 
+        :root {
+            --brand: #5c3d2e;
+            --brand-dark: #3b2417;
+            --accent: #c0392b;
+            --bg: #f5f0eb;
+            --card-bg: #ffffff;
+            --border: #e0d6cf;
+            --text: #2c1810;
+            --text-muted: #8a7060;
+            --green: #27ae60;
+            --green-light: #e8f5e9;
+            --orange: #e67e22;
+            --radius: 16px;
+            --shadow: 0 2px 12px rgba(92,61,46,0.08);
         }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            padding-top: 136px;
+            padding-bottom: 88px;
+            min-height: 100vh;
+        }
+
+        /* ── HEADER ── */
         .header-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
-            background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(135, 54, 0, 0.1);
-            border-bottom: 3px solid #d35400;
+            background: var(--card-bg);
+            box-shadow: 0 2px 16px rgba(92,61,46,0.12);
         }
 
         .header {
-            background-color: #873600;
+            background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%);
             color: white;
-            padding: 15px 20px;
-            text-align: center;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
         }
 
         .header h1 {
-            margin: 0;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+        }
+
+        .header h1 span {
+            font-weight: 400;
+            opacity: 0.75;
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 1px;
+        }
+
+        .header-settings {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.12);
+            border: none; border-radius: 10px;
+            color: white; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem;
         }
 
         .kayit-durumu {
-            background-color: #e8f5e9;
-            color: #2e7d32;
+            background-color: var(--green-light);
+            color: var(--green);
             text-align: center;
-            font-size: 0.78rem;
-            font-weight: bold;
-            padding: 4px 0;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 5px 0;
+            letter-spacing: 0.03em;
         }
 
+        /* ── TABS ── */
         .tabs-container {
             display: flex;
             overflow-x: auto;
             white-space: nowrap;
-            padding: 12px 8px;
-            background-color: #ffffff;
+            padding: 10px 12px;
+            background: var(--card-bg);
+            gap: 8px;
+            scrollbar-width: none;
         }
+        .tabs-container::-webkit-scrollbar { display: none; }
 
         .tab-btn {
-            background-color: #fdf8f5;
-            border: 2px solid #d7ccc8;
-            color: #3e2723;
-            padding: 10px 18px;
-            margin: 0 5px;
-            border-radius: 25px;
-            font-size: 0.95rem;
-            font-weight: bold;
+            background: var(--bg);
+            border: 1.5px solid var(--border);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 700;
             cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            transition: all 0.18s ease;
+            flex-shrink: 0;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--brand);
+            color: var(--brand);
         }
 
         .tab-btn.active {
-            background-color: #d35400;
+            background: var(--brand);
             color: white;
-            border-color: #d35400;
+            border-color: var(--brand);
         }
 
         .tab-btn.results-tab {
-            background-color: #2e7d32;
+            background: var(--green);
             color: white;
-            border-color: #2e7d32;
+            border-color: var(--green);
         }
 
+        /* ── PAGES ── */
         .page {
             display: none;
-            padding: 15px;
-            max-width: 600px;
+            padding: 16px;
+            max-width: 620px;
             margin: 0 auto;
         }
 
-        .page.active {
-            display: block;
+        .page.active { display: block; }
+
+        .page-title {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--brand-dark);
+            margin-bottom: 14px;
+            padding-left: 2px;
         }
 
+        /* ── PRODUCT ROW ── */
         .product-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #ffffff;
-            padding: 12px 15px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border: 1px solid #d7ccc8;
+            background: var(--card-bg);
+            padding: 14px 16px;
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+            border: 1.5px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: border-color 0.18s;
+        }
+
+        .product-row:focus-within {
+            border-color: var(--brand);
         }
 
         .product-info { flex: 1; }
-        .product-name { font-weight: bold; font-size: 1.05rem; }
-        .product-input { width: 100px; }
+
+        .product-name {
+            font-weight: 800;
+            font-size: 1.0rem;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .product-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .product-input { width: 110px; }
 
         .product-input input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #d7ccc8;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            padding: 12px 10px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1.15rem;
             text-align: center;
-            font-weight: bold;
-            color: #873600;
-            background-color: #fdf8f5;
-            box-sizing: border-box;
+            font-weight: 800;
+            color: var(--brand);
+            background: var(--bg);
+            font-family: 'Nunito', sans-serif;
+            transition: all 0.18s;
+            -moz-appearance: textfield;
         }
+
+        .product-input input::-webkit-outer-spin-button,
+        .product-input input::-webkit-inner-spin-button { -webkit-appearance: none; }
 
         .product-input input:focus {
-            border-color: #d35400;
-            background-color: #fff;
+            border-color: var(--brand);
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(92,61,46,0.1);
         }
 
+        /* ── RESULTS ── */
         .results-card {
-            background-color: #ffffff;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
             padding: 18px;
-            margin-bottom: 15px;
-            border: 1px solid #d7ccc8;
+            margin-bottom: 14px;
+            border: 1.5px solid var(--border);
+            box-shadow: var(--shadow);
         }
-        
+
         .res-header {
             display: flex;
             justify-content: space-between;
-            font-weight: bold;
-            border-bottom: 2px solid #d35400;
+            font-weight: 800;
+            border-bottom: 2.5px solid var(--brand);
             padding-bottom: 10px;
             margin-bottom: 10px;
-            color: #873600;
+            color: var(--brand);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
         }
 
         .res-row {
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
-            border-bottom: 1px solid #d7ccc8;
+            border-bottom: 1px solid var(--border);
+            align-items: center;
         }
 
-        .res-name { width: 45%; font-weight: bold; }
-        .res-adet { width: 25%; text-align: center; color: #873600; font-weight: bold;}
-        .res-tutar { width: 30%; text-align: right; color: #2e7d32; font-weight: bold;}
+        .res-row:last-child { border-bottom: none; }
 
+        .res-name { width: 48%; font-weight: 700; font-size: 0.92rem; }
+        .res-adet { width: 22%; text-align: center; color: var(--brand); font-weight: 800; font-size: 1rem; }
+        .res-tutar { width: 30%; text-align: right; color: var(--green); font-weight: 800; font-size: 0.95rem; }
+
+        /* ── EXTRA INCOME ── */
         .extra-income-card {
-            background-color: #ffffff;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
             padding: 18px;
-            margin-bottom: 15px;
-            border: 1px solid #d7ccc8;
+            margin-bottom: 14px;
+            border: 1.5px solid var(--border);
+            box-shadow: var(--shadow);
         }
 
         .extra-income-card h3 {
-            margin-top: 0;
-            font-size: 1.1rem;
-            color: #873600;
-            border-bottom: 2px solid #d7ccc8;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--brand);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
         }
 
         .extra-input-row {
@@ -176,58 +286,108 @@
             margin-bottom: 12px;
         }
 
-        .extra-input-row label { font-weight: bold; }
+        .extra-input-row:last-child { margin-bottom: 0; }
+
+        .extra-input-row label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
 
         .extra-input-row input {
-            width: 120px;
-            padding: 10px;
-            border: 2px solid #d7ccc8;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            text-align: right;
-            font-weight: bold;
-            color: #2e7d32;
-        }
-
-        .btn-excel {
-            display: block;
-            width: 100%;
-            background-color: #1b5e20;
-            color: white;
-            text-align: center;
-            padding: 16px;
+            width: 130px;
+            padding: 10px 12px;
+            border: 2px solid var(--border);
             border-radius: 12px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border: none;
-            margin-bottom: 20px;
-            cursor: pointer;
+            font-size: 1.05rem;
+            text-align: right;
+            font-weight: 800;
+            color: var(--green);
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg);
+            transition: all 0.18s;
+            -moz-appearance: textfield;
         }
 
+        .extra-input-row input::-webkit-outer-spin-button,
+        .extra-input-row input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+        .extra-input-row input:focus {
+            outline: none;
+            border-color: var(--green);
+            background: white;
+        }
+
+        /* ── BOTTOM BAR ── */
         .bottom-bar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #873600;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%);
             color: white;
-            padding: 15px 20px;
+            padding: 14px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
+            box-shadow: 0 -4px 20px rgba(59,36,23,0.2);
         }
 
-        .grand-total { font-size: 1.6rem; font-weight: bold; color: #a5d6a7; }
+        .bottom-label {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.6);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 2px;
+        }
+
+        .grand-total {
+            font-size: 1.55rem;
+            font-weight: 900;
+            color: #a8e6b8;
+            letter-spacing: -0.01em;
+        }
 
         .btn-clear {
-            background-color: #c62828;
+            background: rgba(255,255,255,0.12);
             color: white;
-            border: 2px solid #fff;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: bold;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.88rem;
             cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            transition: background 0.15s;
+        }
+
+        .btn-clear:hover {
+            background: rgba(198,40,40,0.5);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        /* ── EXCEL BTN ── */
+        .btn-excel {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: var(--radius);
+            font-weight: 800;
+            font-size: 1rem;
+            border: none;
+            margin-bottom: 20px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            box-shadow: 0 4px 14px rgba(27,94,32,0.3);
+            transition: transform 0.12s, box-shadow 0.12s;
+        }
+
+        .btn-excel:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(27,94,32,0.2);
         }
     </style>
 </head>
@@ -235,9 +395,13 @@
 
     <div class="header-container">
         <div class="header">
-            <h1> Meydan Fırın </h1>
+            <div class="header-left">
+        
+                <h1>🥖Meydan Fırın🥖<span></span></h1>
+            </div>
+          
         </div>
-        <div class="kayit-durumu" id="kayit-durumu">✹Brusk✹</div>
+        <div class="kayit-durumu" id="kayit-durumu">✹ Brusk ✹</div>
         <div class="tabs-container" id="tabs"></div>
     </div>
 
@@ -264,7 +428,7 @@
                 <input type="number" id="ekstra-gelir" placeholder="0" onkeyup="kaydetVeHesapla()" onchange="kaydetVeHesapla()">
             </div>
         </div>
-        
+
         <button class="btn-excel" onclick="excelIndir()">
             📊 Detaylı Excel Paylaş / İndir
         </button>
@@ -272,7 +436,7 @@
 
     <div class="bottom-bar">
         <div>
-            <div style="font-size: 0.8rem; color: #ffccbc; font-weight: bold;">GÜNLÜK CİRO</div>
+            <div class="bottom-label">Günlük Ciro</div>
             <div class="grand-total" id="grandTotal">0 ₺</div>
         </div>
         <button class="btn-clear" onclick="sifirla()">Sıfırla</button>
@@ -284,9 +448,9 @@
         var sutunlar = [
             { id: "uretim", label: "Üretim Adedi" },
             { id: "devir", label: "Devir (Dünden)" },
-            { id: "kalan", label: "Kalan Adet" },
-            { id: "fiyat", label: "Birim Fiyat" },
-            { id: "disari", label: "Dışarı (Şoför)" },
+            { id: "kalan", label: "Tezgahta Kalan" },
+            { id: "fiyat", label: "Fiyatlar" },
+            { id: "disari", label: "Dışarı Şöför" },
             { id: "gelirde", label: "Gelirde Giden" },
             { id: "iskarta", label: "Iskarta" },
             { id: "geri", label: "Geri Hamur" },
@@ -294,30 +458,28 @@
         ];
 
         var urunler = [
-            { name: "Tekli Ekmek", fiyat: 15 },
-            { name: "10'lu Ekmek", fiyat: 70 },
-            { name: "5'li Ekmek", fiyat: 60 },
-            { name: "3'lü Ekmek", fiyat: 40 },
-            { name: "Mini Ekmek", fiyat: 10 },
-            { name: "Çeşit Ekmek", fiyat: 40 },
-            { name: "B. Simit", fiyat: 30 },
-            { name: "B. Norşin", fiyat: 30 },
-            { name: "K. Norşin", fiyat: 15 },
-            { name: "Baget", fiyat: 15 },
-            { name: "Çiftli Ekmek", fiyat: 30 },
-            { name: "Peksimet", fiyat: 60 },
-            { name: "Lavaş", fiyat: 35 },
-            { name: "Tandır", fiyat: 35 },
-            { name: "Çiçek", fiyat: 35 },
-            { name: "Siyez", fiyat: 60 },
-            { name: "Çıtır, Sütlü T.yağlı Poğaça", fiyat: 20 },
-            { name: "Açma", fiyat: 25 },
-            { name: "Kkp, Kurabiye, Çikolatalı", fiyat: 30 },
-            { name: "Tahinli, Kete, Pizza Kumru", fiyat: 35 },
-            { name: "S. Pizza, S. Böreği", fiyat: 40 }
+            { name: "Tekli Ekmek", sub: "", fiyat: 15 },
+            { name: "10'lu Ekmek", sub: "", fiyat: 70 },
+            { name: "5'li Ekmek", sub: "", fiyat: 60 },
+            { name: "3'lü Ekmek", sub: "", fiyat: 40 },
+            { name: "Mini Ekmek", sub: "", fiyat: 10 },
+            { name: "Çeşit Ekmek", sub: "", fiyat: 40 },
+            { name: "B. Simit", sub: "", fiyat: 30 },
+            { name: "B. Norşin", sub: "", fiyat: 30 },
+            { name: "K. Norşin", sub: "", fiyat: 15 },
+            { name: "Baget", sub: "", fiyat: 15 },
+            { name: "Çiftli Ekmek", sub: "", fiyat: 30 },
+            { name: "Peksimet", sub: "", fiyat: 60 },
+            { name: "Lavaş", sub: "", fiyat: 35 },
+            { name: "Tandır", sub: "", fiyat: 35 },
+            { name: "Çiçek", sub: "", fiyat: 35 },
+            { name: "Siyez", sub: "", fiyat: 60 },
+            { name: "Çıtır, Sütlü T.yağlı Poğaça", sub: "", fiyat: 20 },
+            { name: "Açma", sub: "", fiyat: 25 },
+            { name: "Kkp, Kurabiye, Çikolatalı", sub: "", fiyat: 30 },
+            { name: "Tahinli, Kete, Pizza Kumru", sub: "", fiyat: 35 },
+            { name: "S. Pizza, S. Böreği", sub: "", fiyat: 40 }
         ];
-
-        // --- VERİ KAYDETME / YÜKLEME ---
 
         function tumVerileriKaydet() {
             var veri = {};
@@ -333,7 +495,6 @@
             var ekstraGelirEl = document.getElementById('ekstra-gelir');
             veri['ekstra-bayat'] = ekstraBayatEl ? ekstraBayatEl.value : '';
             veri['ekstra-gelir'] = ekstraGelirEl ? ekstraGelirEl.value : '';
-
             try {
                 localStorage.setItem(KAYIT_ANAHTARI, JSON.stringify(veri));
                 gosterKayitDurumu('✅ Kaydedildi');
@@ -347,9 +508,7 @@
                 var raw = localStorage.getItem(KAYIT_ANAHTARI);
                 if (!raw) return null;
                 return JSON.parse(raw);
-            } catch(e) {
-                return null;
-            }
+            } catch(e) { return null; }
         }
 
         function inputaVeriYaz(kayitliVeri) {
@@ -373,7 +532,6 @@
         var kayitZamanlayici = null;
         function kaydetVeHesapla() {
             hesapla();
-            // Çok sık yazmayı önlemek için 500ms gecikme
             clearTimeout(kayitZamanlayici);
             kayitZamanlayici = setTimeout(function() {
                 tumVerileriKaydet();
@@ -390,48 +548,53 @@
             }, 2000);
         }
 
-        // --- UYGULAMA BAŞLATMA ---
-
         function uygulamayiBaslat() {
             var tabsEl = document.getElementById('tabs');
             var pagesEl = document.getElementById('pages-container');
 
             for (var c = 0; c < sutunlar.length; c++) {
                 var sutun = sutunlar[c];
-                
+
                 var btn = document.createElement('button');
                 btn.className = 'tab-btn ' + (c === 0 ? 'active' : '');
                 btn.innerText = sutun.label;
                 btn.setAttribute('data-hedef', sutun.id);
-                btn.onclick = function() { sekmeDegistir(this.getAttribute('data-hedef'), this); };
+                btn.onclick = (function(id, b) {
+                    return function() { sekmeDegistir(id, b); };
+                })(sutun.id, btn);
                 tabsEl.appendChild(btn);
 
                 var sayfa = document.createElement('div');
                 sayfa.className = 'page ' + (c === 0 ? 'active' : '');
                 sayfa.id = 'page-' + sutun.id;
 
+                var titleDiv = document.createElement('div');
+                titleDiv.className = 'page-title';
+                titleDiv.innerText = sutun.label === 'Fiyatlar' ? 'Fiyatlar' : sutun.label;
+                sayfa.appendChild(titleDiv);
+
                 var htmlIcerik = '';
                 for (var i = 0; i < urunler.length; i++) {
                     var urun = urunler[i];
                     var deger = (sutun.id === 'fiyat') ? urun.fiyat : '';
-                    
+                    var subHtml = urun.sub ? '<div class="product-sub">' + urun.sub + '</div>' : '';
+
                     htmlIcerik += '<div class="product-row">';
-                    htmlIcerik += '<div class="product-info"><div class="product-name">' + urun.name + '</div></div>';
+                    htmlIcerik += '<div class="product-info"><div class="product-name">' + urun.name + '</div>' + subHtml + '</div>';
                     htmlIcerik += '<div class="product-input">';
                     htmlIcerik += '<input type="number" id="input-' + sutun.id + '-' + i + '" value="' + deger + '" placeholder="0" onkeyup="kaydetVeHesapla()" onchange="kaydetVeHesapla()">';
                     htmlIcerik += '</div></div>';
                 }
-                sayfa.innerHTML = htmlIcerik;
+                sayfa.innerHTML += htmlIcerik;
                 pagesEl.appendChild(sayfa);
             }
 
             var sonucBtn = document.createElement('button');
             sonucBtn.className = 'tab-btn results-tab';
             sonucBtn.innerText = '📊 Sonuçları Gör';
-            sonucBtn.onclick = function() { sekmeDegistir('sonuclar', this); };
+            sonucBtn.onclick = function() { sekmeDegistir('sonuclar', sonucBtn); };
             tabsEl.appendChild(sonucBtn);
 
-            // Kayıtlı verileri yükle (varsa fiyatların üzerine yazar)
             var kayitliVeri = kaydedilmisVerileriYukle();
             if (kayitliVeri) {
                 inputaVeriYaz(kayitliVeri);
@@ -442,11 +605,19 @@
 
         function sekmeDegistir(hedefId, tiklananButon) {
             var sayfalar = document.querySelectorAll('.page');
-            for(var i=0; i<sayfalar.length; i++) { sayfalar[i].className = 'page'; }
-            
+            for (var i = 0; i < sayfalar.length; i++) { sayfalar[i].className = 'page'; }
+
             var sekmeler = document.querySelectorAll('.tab-btn');
-            for(var i=0; i<sekmeler.length; i++) { sekmeler[i].className = sekmeler[i].className.replace(' active', ''); }
-            
+            for (var i = 0; i < sekmeler.length; i++) {
+                var s = sekmeler[i];
+                s.className = s.className.replace(' active', '');
+                if (s.classList.contains('results-tab')) {
+                    s.className = 'tab-btn results-tab';
+                } else {
+                    s.className = 'tab-btn';
+                }
+            }
+
             document.getElementById('page-' + hedefId).className = 'page active';
             tiklananButon.className += ' active';
             window.scrollTo(0, 0);
@@ -454,7 +625,7 @@
 
         function degerAl(sutunId, urunIndex) {
             var eleman = document.getElementById('input-' + sutunId + '-' + urunIndex);
-            if(!eleman || eleman.value === '') return 0;
+            if (!eleman || eleman.value === '') return 0;
             var sayi = parseFloat(eleman.value);
             return isNaN(sayi) ? 0 : sayi;
         }
@@ -466,28 +637,26 @@
             for (var i = 0; i < urunler.length; i++) {
                 var urun = urunler[i];
                 var uretim = degerAl('uretim', i);
-                var devir = degerAl('devir', i); 
-                var kalan = degerAl('kalan', i);
-                var fiyat = degerAl('fiyat', i);
+                var devir  = degerAl('devir', i);
+                var kalan  = degerAl('kalan', i);
+                var fiyat  = degerAl('fiyat', i);
                 var disari = degerAl('disari', i);
                 var gelirde = degerAl('gelirde', i);
                 var iskarta = degerAl('iskarta', i);
-                var geri = degerAl('geri', i);
+                var geri   = degerAl('geri', i);
                 var personel = degerAl('personel', i);
 
                 var toplamStok = uretim + devir;
                 var fireler = kalan + disari + gelirde + iskarta + geri + personel;
-                
                 var satis = toplamStok - fireler;
-                if(satis < 0) satis = 0;
-                
+                if (satis < 0) satis = 0;
                 var tutar = satis * fiyat;
                 genelToplam += tutar;
 
                 sonucHtml += '<div class="res-row">';
                 sonucHtml += '<div class="res-name">' + urun.name + '</div>';
                 sonucHtml += '<div class="res-adet">' + satis + '</div>';
-                sonucHtml += '<div class="res-tutar">' + tutar + ' ₺</div>';
+                sonucHtml += '<div class="res-tutar">' + tutar.toLocaleString('tr-TR') + ' ₺</div>';
                 sonucHtml += '</div>';
             }
 
@@ -495,109 +664,82 @@
 
             var ekstraBayatEl = document.getElementById('ekstra-bayat');
             var ekstraGelirEl = document.getElementById('ekstra-gelir');
-            
             var ekstraBayat = (ekstraBayatEl && ekstraBayatEl.value !== '') ? parseFloat(ekstraBayatEl.value) : 0;
             var ekstraGelir = (ekstraGelirEl && ekstraGelirEl.value !== '') ? parseFloat(ekstraGelirEl.value) : 0;
-
-            if(isNaN(ekstraBayat)) ekstraBayat = 0;
-            if(isNaN(ekstraGelir)) ekstraGelir = 0;
-
+            if (isNaN(ekstraBayat)) ekstraBayat = 0;
+            if (isNaN(ekstraGelir)) ekstraGelir = 0;
             genelToplam += ekstraBayat + ekstraGelir;
-            document.getElementById('grandTotal').innerText = genelToplam + " ₺";
+
+            document.getElementById('grandTotal').innerText = genelToplam.toLocaleString('tr-TR') + " ₺";
         }
 
         function sifirla() {
-            if(confirm("Fiyatlar hariç tüm kutucuklar sıfırlanacak. Emin misiniz?")) {
-                for(var c = 0; c < sutunlar.length; c++) {
-                    var sutun = sutunlar[c];
-                    if(sutun.id !== 'fiyat') {
-                        for(var p = 0; p < urunler.length; p++) {
-                            var input = document.getElementById('input-' + sutun.id + '-' + p);
-                            if(input) input.value = '';
+            if (confirm("Fiyatlar hariç tüm kutucuklar sıfırlanacak. Emin misiniz?")) {
+                for (var c = 0; c < sutunlar.length; c++) {
+                    if (sutunlar[c].id !== 'fiyat') {
+                        for (var p = 0; p < urunler.length; p++) {
+                            var input = document.getElementById('input-' + sutunlar[c].id + '-' + p);
+                            if (input) input.value = '';
                         }
                     }
                 }
                 document.getElementById('ekstra-bayat').value = '';
                 document.getElementById('ekstra-gelir').value = '';
-
                 tumVerileriKaydet();
                 hesapla();
                 var ilkSekme = document.querySelector('.tab-btn');
-                if(ilkSekme) sekmeDegistir('uretim', ilkSekme);
+                if (ilkSekme) sekmeDegistir('uretim', ilkSekme);
                 document.querySelector('.tabs-container').scrollLeft = 0;
             }
         }
 
         function excelIndir() {
-            var csvContent = "\uFEFF"; 
-            var headers = ["Ürün Adı", "Devir(Dünden)", "Üretim", "Kalan", "Dışarı(Şoför)", "Gelirde Giden", "Iskarta", "Geri Hamur", "Personel/Hayır", "Satılan Adet", "Birim Fiyat(TL)", "Toplam Tutar(TL)"];
-            csvContent += headers.join(";") + "\r\n"; 
-            
+            var csvContent = "\uFEFF";
+            var headers = ["Ürün Adı","Devir(Dünden)","Üretim","Kalan","Dışarı(Şoför)","Gelirde Giden","Iskarta","Geri Hamur","Personel/Hayır","Satılan Adet","Birim Fiyat(TL)","Toplam Tutar(TL)"];
+            csvContent += headers.join(";") + "\r\n";
+
             var genelToplam = 0;
 
             for (var i = 0; i < urunler.length; i++) {
-                var urun = urunler[i];
-                var uretim = degerAl('uretim', i);
-                var devir = degerAl('devir', i); 
-                var kalan = degerAl('kalan', i);
-                var fiyat = degerAl('fiyat', i);
-                var disari = degerAl('disari', i);
+                var urun    = urunler[i];
+                var uretim  = degerAl('uretim', i);
+                var devir   = degerAl('devir', i);
+                var kalan   = degerAl('kalan', i);
+                var fiyat   = degerAl('fiyat', i);
+                var disari  = degerAl('disari', i);
                 var gelirde = degerAl('gelirde', i);
                 var iskarta = degerAl('iskarta', i);
-                var geri = degerAl('geri', i);
+                var geri    = degerAl('geri', i);
                 var personel = degerAl('personel', i);
 
                 var toplamStok = uretim + devir;
                 var fireler = kalan + disari + gelirde + iskarta + geri + personel;
-                
                 var satis = toplamStok - fireler;
-                if(satis < 0) satis = 0;
-                
+                if (satis < 0) satis = 0;
                 var tutar = satis * fiyat;
                 genelToplam += tutar;
 
-                var row = [ urun.name, devir, uretim, kalan, disari, gelirde, iskarta, geri, personel, satis, fiyat, tutar ];
+                var row = [urun.name, devir, uretim, kalan, disari, gelirde, iskarta, geri, personel, satis, fiyat, tutar];
                 csvContent += row.join(";") + "\r\n";
             }
 
             var ekstraBayat = parseFloat(document.getElementById('ekstra-bayat').value) || 0;
             var ekstraGelir = parseFloat(document.getElementById('ekstra-gelir').value) || 0;
-
             genelToplam += ekstraBayat + ekstraGelir;
 
-            if(ekstraBayat > 0) csvContent += "Diğer Gelirler;Satılan Bayat Geliri;;;;;;;;;;" + ekstraBayat + "\r\n";
-            if(ekstraGelir > 0) csvContent += "Diğer Gelirler;Ek Gelir;;;;;;;;;;" + ekstraGelir + "\r\n";
-            csvContent += "GENEL TOPLAM;;;;;;;;;;;" + genelToplam + "\r\n";
+            csvContent += "\r\n";
+            csvContent += "Satılan Bayat;" + ekstraBayat + "\r\n";
+            csvContent += "Ek Gelir;" + ekstraGelir + "\r\n";
+            csvContent += "GÜNLÜK CİRO;;" + genelToplam + "\r\n";
 
             var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            var bugun = new Date();
-            var tarihMetni = bugun.getDate() + "-" + (bugun.getMonth()+1) + "-" + bugun.getFullYear();
-            var dosyaAdi = "MeydanFirin_Icmal_" + tarihMetni + ".csv";
-
-            if (navigator.share && navigator.canShare) {
-                var file = new File([blob], dosyaAdi, { type: 'text/csv' });
-                if (navigator.canShare({ files: [file] })) {
-                    navigator.share({
-                        title: 'Günlük İcmal',
-                        text: tarihMetni + ' tarihli Meydan Fırın icmal tablosu. Ciro: ' + genelToplam + ' ₺',
-                        files: [file]
-                    }).catch(function(e){ console.log("Paylaşım iptal edildi."); });
-                    return; 
-                }
-            }
-
             var link = document.createElement("a");
-            if (link.download !== undefined) {
-                var url = URL.createObjectURL(blob);
-                link.setAttribute("href", url);
-                link.setAttribute("download", dosyaAdi);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } else {
-                alert("Tarayıcı indirmeyi desteklemiyor.");
-            }
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            var bugun = new Date();
+            var tarih = bugun.getDate() + '-' + (bugun.getMonth()+1) + '-' + bugun.getFullYear();
+            link.setAttribute("download", "MeydanFirin_" + tarih + ".csv");
+            link.click();
         }
 
         uygulamayiBaslat();
